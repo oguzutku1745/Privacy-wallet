@@ -131,6 +131,7 @@
     "@ledgerhq/cryptoassets": "7.3.0",
     "@ledgerhq/hw-app-eth": "6.30.5",
     "@ledgerhq/hw-app-btc": "9.1.2",
-    "@solana/web3.js": "1.50.1"
+    "@solana/web3.js": "1.50.1",
+    "liquality": "portal:/Users/ouyildiz/Desktop/ODTÜ/OBT/Liquality/wallet-core"
   }
 }

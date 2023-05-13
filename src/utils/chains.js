@@ -2,7 +2,7 @@ import { ChainId as ChainName, Network } from '@liquality/cryptoassets'
 
 export const chainIdsMapping = {
   eip155: {
-    [42161]: `${ChainName.Arbitrum}:${Network.Mainnet}`,
+    [1337]: `${ChainName.Localhost}:${Network.Mainnet}`,
     [421613]: `${ChainName.Arbitrum}:${Network.Testnet}`,
     [43114]: `${ChainName.Avalanche}:${Network.Mainnet}`,
     [43113]: `${ChainName.Avalanche}:${Network.Testnet}`,

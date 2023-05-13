@@ -184,7 +184,7 @@ class OverviewPage {
       }
 
       case 'ARBETH': {
-        const arbeth = await page.waitForSelector('#ARBITRUM', {
+        const arbeth = await page.waitForSelector('#LOCALHOST', {
           timeout: elementVisibleTimeout,
           visible: true
         })

@@ -56,7 +56,7 @@
     },
     "head": {
         "dappConnected": "dApp Connected",
-        "connectDapp": "Connect dApp"
+        "connectDapp": "Connect dApps"
     },
     "ledger": {
         "signTo": "Sign to %{action} Swap",

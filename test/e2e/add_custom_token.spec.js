@@ -31,7 +31,7 @@ const customTokensDetails = [
     decimal: '18'
   },
   {
-    chain: 'arbitrum',
+    chain: 'localhost',
     address: '0xd4d42F0b6DEF4CE0383636770eF773390d85c61A',
     name: 'SushiToken',
     symbol: 'SUSHI',

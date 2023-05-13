@@ -71,7 +71,7 @@ describe('Derived path address validation-["MAINNET","PULL_REQUEST_TEST","MAINNE
     // POLYGON
     const polygonAddress = await overviewPage.GetAssertAddress(page, 'POLYGON')
     // ARBITRUM
-    const arbitrumAddress = await overviewPage.GetAssertAddress(page, 'ARBITRUM')
+    const arbitrumAddress = await overviewPage.GetAssertAddress(page, 'LOCALHOST')
 
     assertAddresses.push(ethAddress, rskAddress, bscAddress, polygonAddress, arbitrumAddress)
 
@@ -162,7 +162,7 @@ describe('Derived path address validation-["MAINNET","PULL_REQUEST_TEST","MAINNE
     const polygonAddress = await overviewPage.GetAssertAddress(page, 'POLYGON')
     expect(polygonAddress, 'POLYGON address is empty on overview page').to.contain.oneOf(['...'])
     // ARBITRUM
-    const arbitrumAddress = await overviewPage.GetAssertAddress(page, 'ARBITRUM')
+    const arbitrumAddress = await overviewPage.GetAssertAddress(page, 'LOCALHOST')
     expect(arbitrumAddress, 'ARBITRUM address is empty on overview page').to.contain.oneOf(['...'])
 
     assertAddresses.push(ethAddress, bscAddress, polygonAddress, arbitrumAddress, rsk1Address)
@@ -237,14 +237,14 @@ describe('Derived path address validation-["MAINNET","PULL_REQUEST_TEST","MAINNE
     // POLYGON
     const polygonAddress = await overviewPage.GetAssertAddress(page, 'POLYGON')
     // ARBITRUM
-    const arbitrumAddress = await overviewPage.GetAssertAddress(page, 'ARBITRUM')
+    const arbitrumAddress = await overviewPage.GetAssertAddress(page, 'LOCALHOST')
 
     let details = {
       ETH: ethAddress,
       RSK: rskAddress,
       BSC: bscAddress,
       POLYGON: polygonAddress,
-      ARBITRUM: arbitrumAddress
+      LOCALHOST: arbitrumAddress
     }
 
     assertAddresses.push(ethAddress, rskAddress, bscAddress, polygonAddress, arbitrumAddress)
