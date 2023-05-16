@@ -372,6 +372,7 @@ class OverviewPage {
 
     let chains = await page.$$('.wallet-tab-content > div > div')
     for (let i = 0; i < chains.length; i++) {
+      console.log(chains)
       const assertName = await (await chains[i].getProperty('id')).jsonValue()
       chainNames.push(assertName)
     }

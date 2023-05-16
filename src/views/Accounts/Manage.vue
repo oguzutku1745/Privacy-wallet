@@ -36,6 +36,7 @@ export default {
     chains() {
       return buildConfig.chains.map((chainId) => {
         const { name, code, nativeAsset } = getChain(this.activeNetwork, chainId)
+        console.log(`Accounts for ${chainId}:`, this.getChainAccounts(chainId))
         return {
           id: chainId,
           name,
@@ -59,7 +60,7 @@ export default {
       return this.accounts[this.activeWalletId]?.[this.activeNetwork].filter(
         (a) => a.chain === chainId
       )
-    }
+    },
   }
 }
 </script>

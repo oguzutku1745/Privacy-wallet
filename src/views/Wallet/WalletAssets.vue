@@ -15,10 +15,17 @@ export default {
   },
   methods: {
     onAccountSelected({ account, asset }) {
+      console.log("account: ", account)
+      console.log("asset: ", asset)
       const _asset = asset || account.assets[0]
       this.$router.push(`/accounts/${account.id}/${_asset}`)
     }
+  },
+  mounted() {
+    console.log('Total accounts: ', this.accountsData.length);
+    console.log('Accounts Data: ', this.accountsData);
   }
+  
 }
 </script>
 <style lang="scss"></style>
