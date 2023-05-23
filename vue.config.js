@@ -2,6 +2,7 @@ const path = require('path')
 const AssetReplacePlugin = require('./plugins/AssetReplacePlugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const webpack = require('webpack')
+const WasmPackPlugin = require("@wasm-tool/wasm-pack-plugin");
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
@@ -38,12 +39,21 @@ module.exports = {
       )
     )
 
+
+
     config.plugins.push(
       new AssetReplacePlugin({
         name: '#PAGEPROVIDER#',
         entry: 'pageProvider'
       })
     )
+
+    config.plugins.push(
+      new WasmPackPlugin({
+        crateDirectory: path.resolve(__dirname, '../crypto'),
+        withTypeScript: true 
+      }),
+    );
 
     config.plugins.push(
       new CopyPlugin({
@@ -99,6 +109,39 @@ module.exports = {
           plugins: [{ removeViewBox: false }, { removeDimensions: true }]
         }
       })
+
+    
+    config.resolve.extensions.merge(['.wasm']);
+
+    config.module
+    .rule('wasm')
+    .test(/\.wasm$/)
+    .type('javascript/auto') // This line is required
+    .use('wasm-loader')
+    .loader('wasm-loader')
+    .options({ name: '[name].[hash].[ext]' });
+    
+    config.module
+    .rule('solana')
+    .test(/\.m?js$/)
+    .include.add(/node_modules\/@solana/,/node_modules\/@noble\/curves/)
+    .end()
+    .use('babel-loader')
+    .loader('babel-loader')
+    .options({
+      presets: ['@vue/cli-plugin-babel/preset']
+    });
+
+    config.module
+    .rule('noble')
+    .test(/\.m?js$/)
+    .include.add(/node_modules\/@noble\/curves/)
+    .end()
+    .use('babel-loader')
+    .loader('babel-loader')
+    .options({
+      presets: ['@vue/cli-plugin-babel/preset']
+    });
 
     config.module
       .rule('html')
