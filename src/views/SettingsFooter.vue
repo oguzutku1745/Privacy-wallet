@@ -8,7 +8,8 @@
   </div>
 </template>
 <script>
-import { version } from '../../package.json'
+import pkg from '../../package.json'
+const Version = pkg.version;
 
 export default {
   name: 'SettingsFooter',

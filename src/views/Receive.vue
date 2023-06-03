@@ -88,7 +88,8 @@ import CopyWhiteIcon from '@/assets/icons/copy_white.svg'
 import TickIcon from '@/assets/icons/tick.svg'
 import { ChainId, getChain, isEvmChain } from '@liquality/cryptoassets'
 import cryptoassets from '@liquality/wallet-core/dist/src/utils/cryptoassets'
-import { version as walletVersion } from '../../package.json'
+import pkg from '../../package.json'
+const walletVersion = pkg.version;
 
 export default {
   components: {

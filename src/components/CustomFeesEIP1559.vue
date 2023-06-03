@@ -239,7 +239,7 @@ import {
   NoTipError,
   VeryLowTipError,
   VeryHighTipWarning,
-  NoMaxFeeError,
+  //NoMaxFeeError,
   VeryHighMaxFeeWarning
 } from '@liquality/error-parser/dist/src/LiqualityErrors'
 
@@ -285,9 +285,9 @@ export default {
         ? this.$tle(new VeryHighTipWarning())
         : null
     },
-    noMaxFeeError() {
-      return !this.maxFee ? this.$tle(new NoMaxFeeError()) : null
-    },
+    //noMaxFeeError() {
+    //  return !this.maxFee ? this.$tle(new NoMaxFeeError()) : null
+    //},
     veryLowMaxFeeError() {
       return this.maxFee < this.fees.slow.fee.maxFeePerGas
         ? `Max fee too low. Must be > ${this.fees.slow.fee.maxFeePerGas} GWEI (Base Fee plus Miner Tip).`

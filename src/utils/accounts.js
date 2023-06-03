@@ -4,7 +4,7 @@ export const getAccountIcon = (chain) => {
   return {
     bitcoin: getAssetIcon('BTC'),
     ethereum: getAssetIcon('eth_account'),
-    bsc: getAssetIcon('bnb_account', 'png'),
+    bsc: getAssetIcon('bsc_chain'),
     rsk: getAssetIcon('rsk_account'),
     near: getAssetIcon('NEAR'),
     solana: getAssetIcon('SOL'),

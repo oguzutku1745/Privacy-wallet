@@ -39,7 +39,11 @@ module.exports = {
       )
     )
 
-
+  config.plugins.push(
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+    })
+  )
 
     config.plugins.push(
       new AssetReplacePlugin({
@@ -48,13 +52,23 @@ module.exports = {
       })
     )
 
-    config.plugins.push(
-      new WasmPackPlugin({
-        crateDirectory: path.resolve(__dirname, '../crypto'),
-        withTypeScript: true 
-      }),
-    );
+    config.resolve.fallback = {
+      assert: require.resolve('assert/'),
+      crypto: require.resolve('crypto-browserify'),
+      os: require.resolve('os-browserify'),
+      path: require.resolve('path-browserify'),
+      stream: require.resolve("stream-browserify"),
+      util: require.resolve('util/'),
+      zlib : require.resolve("browserify-zlib"),
+      buffer: require.resolve("buffer/"),
+      fs: false,  // fs is not available in the browser, so we mark it as false
+    }
 
+    config.experiments = {
+      asyncWebAssembly: true,
+      syncWebAssembly: true
+    }
+    
     config.plugins.push(
       new CopyPlugin({
         patterns: [
@@ -86,40 +100,36 @@ module.exports = {
       '@ledgerhq/devices/hid-framing',
       path.resolve('./node_modules/@ledgerhq/devices/lib-es/hid-framing')
     )
+    config.resolve.alias.set('stream$', 'stream-browserify')
 
-    const svgRule = config.module.rule('svg')
-
+		const svgRule = config.module.rule('svg')
     svgRule.uses.clear()
+    svgRule.delete('type')
+    svgRule.delete('generator')
 
+		// Remove regular svg config from root rules list
     svgRule
-      .oneOf('inline')
-      .resourceQuery(/inline/)
-      .use('svg-url-loader')
-      .loader('svg-url-loader')
-      .end()
-      .end()
-      .oneOf('external')
-      .use('babel-loader')
-      .loader('babel-loader')
-      .end()
-      .use('vue-svg-loader')
-      .loader('vue-svg-loader')
-      .options({
-        svgo: {
-          plugins: [{ removeViewBox: false }, { removeDimensions: true }]
-        }
-      })
+    .oneOf('inline')
+    .resourceQuery(/inline/)
+    .use('svg-url-loader')
+    .loader('svg-url-loader')
+    .end()
+    .end()
+    .oneOf('external')
+    .use('babel-loader')
+    .loader('babel-loader')
+    .end()
+    .use('vue-svg-loader')
+    .loader('vue-svg-loader')
+    .options({
+      svgo: {
+        plugins: [{ removeViewBox: false }, { removeDimensions: true }]
+      }
+    })
 
     
     config.resolve.extensions.merge(['.wasm']);
 
-    config.module
-    .rule('wasm')
-    .test(/\.wasm$/)
-    .type('javascript/auto') // This line is required
-    .use('wasm-loader')
-    .loader('wasm-loader')
-    .options({ name: '[name].[hash].[ext]' });
     
     config.module
     .rule('solana')

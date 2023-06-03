@@ -1,4 +1,5 @@
-import { version } from '../../package.json'
+import pkg from '../../package.json'
+const Version = pkg.version;
 
 export const getWalletStateLogs = async () => {
   return new Promise((resolve) => {

@@ -6,7 +6,8 @@ import cryptoassets from '@liquality/wallet-core/dist/src/utils/cryptoassets'
 import { unitToCurrency } from '@liquality/cryptoassets'
 import { prettyFiatBalance } from '@liquality/wallet-core/dist/src/utils/coinFormatter'
 import _ from 'lodash-es'
-import { version as walletVersion } from '../package.json'
+import pkg from '../package.json'
+const walletVersion = pkg.version;
 
 let prevState = _.cloneDeep(store.state)
 

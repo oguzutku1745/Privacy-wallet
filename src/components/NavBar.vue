@@ -78,7 +78,8 @@ import AccountsIcon from '@/assets/icons/accounts_menu_icon.svg'
 import LedgerIcon from '@/assets/icons/ledger_menu_icon.svg'
 import KeyIcon from '@/assets/icons/key.svg'
 import { ChainId } from '@liquality/cryptoassets'
-import { version as walletVersion } from '../../package.json'
+import pkg from '../../package.json'
+const walletVersion = pkg.version;
 
 export default {
   directives: {

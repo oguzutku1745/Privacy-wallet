@@ -1,3 +1,5 @@
+require("@rushstack/eslint-patch/modern-module-resolution")
+
 module.exports = {
   root: true,
 
@@ -31,5 +33,5 @@ module.exports = {
     }
   ],
 
-  extends: ['plugin:vue/essential', 'eslint:recommended', '@vue/prettier']
+  extends: ['plugin:vue/essential', 'eslint:recommended', '@vue/prettier','@vue/eslint-config-prettier']
 }

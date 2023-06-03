@@ -60,7 +60,8 @@
 <script>
 import Modal from '@/components/Modal'
 import Logo from '@/components/icons/Logo'
-import { version } from '/package.json'
+import pkg from '/package.json'
+const version = pkg.version;
 import { mapActions, mapState } from 'vuex'
 import ArrowLeftIcon from '@/assets/icons/arrow_left.svg'
 import ArrowRightIcon from '@/assets/icons/arrow_right.svg'

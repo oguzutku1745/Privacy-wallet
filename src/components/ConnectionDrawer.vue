@@ -52,7 +52,8 @@
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
 import { getChain, isEvmChain } from '@liquality/cryptoassets'
-import { version as walletVersion } from '../../package.json'
+import pkg from '../../package.json'
+const walletVersion = pkg.version;
 import { shortenAddress } from '@liquality/wallet-core/dist/src/utils/address'
 import { buildConfig } from '@liquality/wallet-core'
 

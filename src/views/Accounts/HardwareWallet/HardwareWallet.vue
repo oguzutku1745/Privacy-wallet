@@ -43,7 +43,8 @@ import {
 } from '@liquality/wallet-core/dist/src/utils/ledger'
 import { getAssetIcon } from '@/utils/asset'
 import cryptoassets from '@liquality/wallet-core/dist/src/utils/cryptoassets'
-import { version as walletVersion } from '../../../../package.json'
+import pkg from '../../../../package.json'
+const walletVersion = pkg.version;
 import { getNextAccountColor } from '@liquality/wallet-core/dist/src/utils/accounts'
 import { ChainId, getAllEvmChains } from '@liquality/cryptoassets'
 import { errorToLiqualityErrorString } from '@liquality/error-parser/dist/src/utils'

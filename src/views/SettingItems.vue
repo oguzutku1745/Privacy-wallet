@@ -124,7 +124,8 @@ import ChevronDownIcon from '@/assets/icons/chevron_down.svg'
 import ChevronRightIcon from '@/assets/icons/chevron_right.svg'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { getWalletStateLogs, downloadFile } from '@/utils/export'
-import { version } from '../../package.json'
+import pkg from '../../package.json'
+const Version = pkg.version;
 
 export default {
   name: 'SettingItems',

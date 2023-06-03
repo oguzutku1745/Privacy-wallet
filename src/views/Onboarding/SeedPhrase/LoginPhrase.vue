@@ -62,7 +62,8 @@
 <script>
 import { mapActions } from 'vuex'
 import LogoWallet from '@/assets/icons/logo_wallet.svg?inline'
-import { version as walletVersion } from '../../../../package.json'
+import pkg from '../../../../package.json'
+const walletVersion = pkg.version;
 import { errorToLiqualityErrorString } from '@liquality/error-parser/dist/src/utils'
 import { reportLiqualityError } from '@liquality/error-parser'
 export default {
