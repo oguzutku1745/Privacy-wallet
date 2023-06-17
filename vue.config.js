@@ -38,12 +38,29 @@ module.exports = {
         '@ledgerhq/devices/lib/hid-framing'
       )
     )
-
+    
   config.plugins.push(
     new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer'],
     })
   )
+  
+  config.plugins.push(
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+}),
+  )
+  
+
+  // config.plugins.push(
+  // new webpack.DefinePlugin({
+  //   process: {
+  //      browser: true,
+  //      env: { NODE_ENV: JSON.stringify('development') },
+  //      version: JSON.stringify('v16.15.0')
+  //      }
+  // }))
+  
 
     config.plugins.push(
       new AssetReplacePlugin({
@@ -62,12 +79,10 @@ module.exports = {
       zlib : require.resolve("browserify-zlib"),
       buffer: require.resolve("buffer/"),
       fs: false,  // fs is not available in the browser, so we mark it as false
+      process: require.resolve("process/browser"),
     }
 
-    config.experiments = {
-      asyncWebAssembly: true,
-      syncWebAssembly: true
-    }
+
     
     config.plugins.push(
       new CopyPlugin({
@@ -82,6 +97,11 @@ module.exports = {
         ]
       })
     )
+
+    config.experiments = {
+      asyncWebAssembly: true,
+      syncWebAssembly: true
+    };
 
     config.optimization.splitChunks = {
       cacheGroups: {
@@ -99,7 +119,8 @@ module.exports = {
     config.resolve.alias.set(
       '@ledgerhq/devices/hid-framing',
       path.resolve('./node_modules/@ledgerhq/devices/lib-es/hid-framing')
-    )
+      )
+    config.resolve.alias.set('process$', 'process/browser')
     config.resolve.alias.set('stream$', 'stream-browserify')
 
 		const svgRule = config.module.rule('svg')
@@ -127,9 +148,9 @@ module.exports = {
       }
     })
 
-    
-    config.resolve.extensions.merge(['.wasm']);
-
+    config.experiments = {
+      asyncWebAssembly: true,
+    }
     
     config.module
     .rule('solana')
