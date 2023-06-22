@@ -2,7 +2,6 @@ const path = require('path')
 const AssetReplacePlugin = require('./plugins/AssetReplacePlugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const webpack = require('webpack')
-const WasmPackPlugin = require("@wasm-tool/wasm-pack-plugin");
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
@@ -48,19 +47,19 @@ module.exports = {
   config.plugins.push(
     new webpack.ProvidePlugin({
       process: 'process/browser',
-}),
+  }),
   )
-  
 
-  // config.plugins.push(
-  // new webpack.DefinePlugin({
-  //   process: {
-  //      browser: true,
-  //      env: { NODE_ENV: JSON.stringify('development') },
-  //      version: JSON.stringify('v16.15.0')
-  //      }
-  // }))
-  
+  config.experiments = {
+    asyncWebAssembly: true,
+    syncWebAssembly: true
+  };
+
+  if (isDevelopment) {
+    config.plugins.push(
+      new webpack.HotModuleReplacementPlugin()
+    );
+  }
 
     config.plugins.push(
       new AssetReplacePlugin({
@@ -98,11 +97,6 @@ module.exports = {
       })
     )
 
-    config.experiments = {
-      asyncWebAssembly: true,
-      syncWebAssembly: true
-    };
-
     config.optimization.splitChunks = {
       cacheGroups: {
         default: false
@@ -128,6 +122,12 @@ module.exports = {
     svgRule.delete('type')
     svgRule.delete('generator')
 
+
+  config.experiments = {
+    asyncWebAssembly: true,
+    syncWebAssembly: true
+  };
+    
 		// Remove regular svg config from root rules list
     svgRule
     .oneOf('inline')
@@ -148,10 +148,6 @@ module.exports = {
       }
     })
 
-    config.experiments = {
-      asyncWebAssembly: true,
-    }
-    
     config.module
     .rule('solana')
     .test(/\.m?js$/)
@@ -180,6 +176,7 @@ module.exports = {
       .use('raw-loader')
       .loader('raw-loader')
   },
+  
 
   pluginOptions: {
     browserExtension: {
@@ -201,7 +198,7 @@ module.exports = {
       },
       manifestTransformer: (manifest) => {
         manifest.content_security_policy =
-          "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.segment.com 'sha256-ZgDy59Dh4jH9g/vcPYFpoQ1wumB4IdPEOS1BJc08i+Y='; object-src 'self';"
+          "script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval' 'unsafe-inline' https://cdn.segment.com 'sha256-ZgDy59Dh4jH9g/vcPYFpoQ1wumB4IdPEOS1BJc08i+Y='; object-src 'self';"
         return manifest
       }
     }
